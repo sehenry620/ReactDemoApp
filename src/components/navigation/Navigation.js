@@ -13,6 +13,9 @@ import React from 'react';
             <li>
                 <Link to="/contact">Contact</Link>
             </li>
+            <li>
+                <Link to="/jeopardy">Jeopardy Game</Link>
+            </li>
             </ul>
         );
     }
