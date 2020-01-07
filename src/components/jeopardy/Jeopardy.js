@@ -42,6 +42,8 @@ class Jeopardy extends Component {
       submitted: true
     });
     this.getNewQuestion();
+    this.state.formData.answer = ""
+    
   };
 
   handleChange = event => {
