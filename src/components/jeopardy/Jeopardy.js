@@ -21,18 +21,32 @@ class Jeopardy extends Component {
       this.setState({
         data: result.data[0]
       });
+      console.log(this.state.data.answer);
     });
   }
 
   handleSubmit = event => {
     event.preventDefault();
+    if (this.state.formData.answer === this.state.data.answer) {
+      // console.log("hi")
+      let score = this.state.score;
+      score = this.state.data.value + score;
+      this.setState({ score });
+    } else {
+      let score = this.state.score;
+      score = this.state.data.value - score;
+      this.setState({ score });
+      console.log("wrong answer :(")
+    }
     this.setState({
       submitted: true
     });
+    this.getNewQuestion();
   };
 
   handleChange = event => {
     let formData = this.state.formData;
+    // console.log(formData);
     formData[event.target.name] = event.target.value;
     this.setState({ formData });
   };
@@ -41,7 +55,7 @@ class Jeopardy extends Component {
   componentDidMount() {
     this.getNewQuestion();
   }
-  
+
   //display the results on the screen
   render() {
     if (this.state.data.category) {
