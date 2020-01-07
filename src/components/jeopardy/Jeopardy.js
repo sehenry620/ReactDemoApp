@@ -33,7 +33,6 @@ class Jeopardy extends Component {
 
   handleChange = event => {
     let formData = this.state.formData;
-    // console.log(formData);
     formData[event.target.name] = event.target.value;
     this.setState({ formData });
   };
@@ -42,6 +41,7 @@ class Jeopardy extends Component {
   componentDidMount() {
     this.getNewQuestion();
   }
+  
   //display the results on the screen
   render() {
     if (this.state.data.category) {
@@ -53,24 +53,22 @@ class Jeopardy extends Component {
           <br />
           Category: {JSON.stringify(this.state.data.category.title)}
           <br />
-          Value: {this.state.data.value}
+          Point Value: {this.state.data.value}
           <br />
           <form onSubmit={this.handleSubmit}>
-          <div>
-            <label>Answer:</label>
-            <input
-              onChange={this.handleChange}
-              type="text"
-              name="answer"
-              value={this.state.formData.answer}
-            />
-          </div>
-          <button>Submit Form</button>
-          <br />
-         
-        </form>
+            <div>
+              <label>Answer:</label>
+              <input
+                onChange={this.handleChange}
+                type="text"
+                name="answer"
+                value={this.state.formData.answer}
+              />
+            </div>
+            <button>Submit Form</button>
+          </form>
         </div>
-      )
+      );
     } else {
       return <div></div>;
     }

@@ -87,13 +87,13 @@ class Contact extends Component {
           </div>
           <button>Submit Form</button>
           <br />
-          {this.state.formData.firstName}
+          {/* {this.state.formData.firstName}
           <br />
           {this.state.formData.lastName}
           <br />
           {this.state.formData.email}
           <br />
-          {this.state.formData.phone}
+          {this.state.formData.phone} */}
         </form>
       </div>
     );
