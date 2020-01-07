@@ -7,8 +7,12 @@ class Jeopardy extends Component {
     super(props);
     this.client = new JeopardyService();
     this.state = {
+      submitted: false,
       data: {},
-      score: 0
+      score: 0,
+      formData: {
+        answer: ""
+      }
     };
   }
   //get a new random question from the API and add it to the data object in state
@@ -19,6 +23,21 @@ class Jeopardy extends Component {
       });
     });
   }
+
+  handleSubmit = event => {
+    event.preventDefault();
+    this.setState({
+      submitted: true
+    });
+  };
+
+  handleChange = event => {
+    let formData = this.state.formData;
+    // console.log(formData);
+    formData[event.target.name] = event.target.value;
+    this.setState({ formData });
+  };
+
   //when the component mounts, get a the first question
   componentDidMount() {
     this.getNewQuestion();
@@ -28,12 +47,28 @@ class Jeopardy extends Component {
     if (this.state.data.category) {
       return (
         <div>
+          Score: {this.state.score}
+          <br />
           Question: {this.state.data.question}
           <br />
           Category: {JSON.stringify(this.state.data.category.title)}
           <br />
           Value: {this.state.data.value}
           <br />
+          <form onSubmit={this.handleSubmit}>
+          <div>
+            <label>Answer:</label>
+            <input
+              onChange={this.handleChange}
+              type="text"
+              name="answer"
+              value={this.state.formData.answer}
+            />
+          </div>
+          <button>Submit Form</button>
+          <br />
+         
+        </form>
         </div>
       )
     } else {
