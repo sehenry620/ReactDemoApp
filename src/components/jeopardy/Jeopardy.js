@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 //import our service
 import JeopardyService from "../../jeopardyService";
+import JeopDisplay from "../jeopDisplay/JeopDisplay";
+
 class Jeopardy extends Component {
   //set our initial state and set up our service as this.client on this component
   constructor(props) {
@@ -36,14 +38,13 @@ class Jeopardy extends Component {
       let score = this.state.score;
       score = score - this.state.data.value;
       this.setState({ score });
-      console.log("wrong answer :(")
+      console.log("wrong answer :(");
     }
     this.setState({
       submitted: true
     });
     this.getNewQuestion();
-    this.state.formData.answer = ""
-    
+    this.state.formData.answer = "";
   };
 
   handleChange = event => {
@@ -59,32 +60,51 @@ class Jeopardy extends Component {
   }
 
   //display the results on the screen
+
+  // MEDIUM MODE 
+  
   render() {
     if (this.state.data.category) {
-      return (
-        <div>
-          Score: {this.state.score}
-          <br />
-          Question: {this.state.data.question}
-          <br />
-          Category: {JSON.stringify(this.state.data.category.title)}
-          <br />
-          Point Value: {this.state.data.value}
-          <br />
-          <form onSubmit={this.handleSubmit}>
-            <div>
-              <label>Answer:</label>
-              <input
-                onChange={this.handleChange}
-                type="text"
-                name="answer"
-                value={this.state.formData.answer}
-              />
-            </div>
-            <button>Submit Form</button>
-          </form>
-        </div>
-      );
+      return( 
+      <JeopDisplay
+        score={this.state.score}
+        question={this.state.data.question}
+        category={JSON.stringify(this.state.data.category.title)}
+        pointValue={this.state.data.value}
+        actualAnswer={this.state.data.answer}
+        inputAnswer={this.state.formData.answer}
+        handleChange={this.handleChange}
+        handleSubmit={this.handleSubmit}
+        
+
+      />
+      )
+      // EASY MODE
+
+      // return (
+      //   <div>
+      //     Score: {this.state.score}
+      //     <br />
+      //     Question: {this.state.data.question}
+      //     <br />
+      //     Category: {JSON.stringify(this.state.data.category.title)}
+      //     <br />
+      //     Point Value: {this.state.data.value}
+      //     <br />
+      //     <form onSubmit={this.handleSubmit}>
+      //       <div>
+      //         <label>Answer:</label>
+      //         <input
+      //           onChange={this.handleChange}
+      //           type="text"
+      //           name="answer"
+      //           value={this.state.formData.answer}
+      //         />
+      //       </div>
+      //       <button>Submit Form</button>
+      //     </form>
+      //   </div>
+      // );
     } else {
       return <div></div>;
     }
