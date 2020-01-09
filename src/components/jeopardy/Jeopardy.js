@@ -34,7 +34,7 @@ class Jeopardy extends Component {
       this.setState({ score });
     } else {
       let score = this.state.score;
-      score = this.state.data.value - score;
+      score = score - this.state.data.value;
       this.setState({ score });
       console.log("wrong answer :(")
     }
